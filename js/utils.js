@@ -94,15 +94,57 @@ function init_data() {
   };
 }
 
-// collect data for 'collect 1' moment
-function collect_data_1() {
-
+// retrieve actitvities
+function get_activities(n, batch) {
+  var batch_selection = [];
+  $(t_activities).each(function(i, eli) {
+    if (eli.batch == batch) {
+      batch_selection.push(eli);
+    }
+  });
+  var n_selection = shuffle(batch_selection).slice(0, n);
+  return n_selection;
 }
 
-// collect data for 'collect 2' moment
-function collect_data_2() {
-  data.input_area = 'abc';
-  data.user_id = 'prolific_id';
+
+// show activities for deceptive condition
+function show_activities(array_with_activities, ID) {
+  ID.append('</br>');
+  $(array_with_activities).each(function(i, eli) {
+    var button_x = $('<button/>', {
+      text: eli.activity,
+      class: 'normal_button',
+      id: 'activity_button' + i,
+      click: function() {
+        if ($(this).hasClass('active_button') == true) {
+          $(this).removeClass('active_button');
+        } else {
+          $(this).addClass('active_button');
+        }
+      }
+    });
+    $("#sub_div5").append(button_x);
+  });
+}
+
+// assign activity from selection
+function assign_activity() {
+  var activated_buttons = [];
+  var final_activity;
+  $(".active_button").each(function(i, eli) {
+    activated_buttons[i] = eli;
+  });
+  if (activated_buttons.length < 1) {
+    alert('Select at least one activity that you are NOT going to do in the next 7 days.');
+  } else if (activated_buttons.length > 1) {
+    final_activity = shuffle(activated_buttons)[0];
+    assigned_activity = final_activity.textContent;
+    return true;
+  } else if(activated_buttons.length == 1){
+    final_activity = activated_buttons[0];
+    assigned_activity = final_activity.textContent;
+    return true;
+  }
 }
 
 // misc
@@ -118,14 +160,26 @@ function twoletters() {
   return output;
 }
 
-function set_slider_value(val, output_id) {
-  $(output_id).val(val + '%').hide();
-}
-
 function sum(arr) {
   var r = 0;
   $.each(arr, function(i, v) {
     r += v;
   });
   return r;
+}
+
+function shuffle(array) {
+  var newarr = [];
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    newarr[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return newarr;
 }

@@ -67,6 +67,31 @@ html {
   font-family: "Arial" !important;
 }
 
+#input_activity {
+  margin: 0;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  width: 60%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-top: 1%;
+  font-size: 1.75vw;
+  font-family: "Arial" !important;
+}
+
+.normal_button{
+  font-size: 1.8vw !important;
+}
+
+.active_button{
+  color: Red;
+  font-weight: bold !important;
+}
+
+
 .slidecontainer {
   width: 80%;
   height: 20%;

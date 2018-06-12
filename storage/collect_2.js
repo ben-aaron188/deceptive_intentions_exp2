@@ -1,4 +1,4 @@
-function collect_1_php(var_data) {
+function collect_2_php(var_data) {
   $.ajax({
     type: "POST",
     url: "../php/collect_2.php",
@@ -10,7 +10,7 @@ function collect_1_php(var_data) {
     },
     success: function(data) {
       // console.log(data);
-      console.log("... collect 1 successful ...");
+      console.log("... collect 2 successful ...");
     },
   });
 }
