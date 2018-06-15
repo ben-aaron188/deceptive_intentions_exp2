@@ -1,2 +1,2 @@
-var intro1 = 'introin trointro 111introintrointro111 introintr ointro11 1intro introintro1 11intr ointrointro111';
-var intro2 = 'introintroin tro222int rointr ointro222i ntrointrointro 222introin trointro222introintrointro222';
+var intro1 = 'Dear participant, Thanks for taking part in this brief study.';
+var intro2 = 'We are interested in how lies differ from truths. Some participants are instructed to tell the truth in this study, others have to lie.';

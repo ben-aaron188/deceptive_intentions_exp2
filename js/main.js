@@ -13,8 +13,9 @@ var sum_pages = number_of_start_screens + number_of_ic_screens + number_of_intro
 $(document).ready(function() {
   get_unid();
   get_condition();
+  init_data();
   for (i = 1; i < sum_pages + 1; i++) {
-    var div_to_append = '<div class="pt_child vertical" id="div' + i + '"><div class="pt_child_child" id="sub_div' + i + '"></div><div class="btn_proceed">button</div></div>';
+    var div_to_append = '<div class="pt_child vertical" id="div' + i + '"><div class="pt_child_child" id="sub_div' + i + '"></div><div class="btn_proceed">Continue</div></div>';
     // <span id="press_enter">press enter to proceed</span>
     $("#pt_wrapper").append(div_to_append);
   }
@@ -26,9 +27,16 @@ $(document).ready(function() {
   $("#sub_div1").text(intro1);
   $("#sub_div2").text(intro2);
   $("#sub_div3").text(ic);
-  $("#sub_div4").text(instructions1);
-  $("#sub_div5").text(instructions2);
-  $("#sub_div6").text(instructions3);
+  if(data.condition == 1){
+    $("#sub_div4").text(instructions1_d);
+    $("#sub_div5").text(instructions2_d);
+    $("#sub_div6").text(instructions3_d);
+  } else if(data.condition == 0){
+    $("#sub_div4").text(instructions1_t);
+    $("#sub_div5").text(instructions2_t);
+    $("#sub_div6").text(instructions3_t);
+  }
+
   $("#sub_div7").text(task);
   $("#sub_div8").text(outro1);
   $("#sub_div9").text(outro2);
@@ -38,6 +46,18 @@ $(document).ready(function() {
   init_page_transition_button();
 
   $(".btn_proceed").on('click', function(e) {
+
+// TODO:
+// flow:
+// intro1, intro2
+// ic
+// d: instr1, instr2 (activity), instr3 (selection), instr4, instr5, instr6
+// t: instr1, instr2 (activity), instr4, instr5, instr6
+// task
+// d: outro1, outro2, outro3, outro4, outro5, outro6, outro7
+// t: outro1, outro2, outro3, outro4, outro5, outro7
+
+
     if (get_visible_element() == "div4") {
       if (data.condition == 0) {
         // truthful
@@ -64,7 +84,6 @@ $(document).ready(function() {
 
 
     } else if (get_visible_element() == "div6") {
-      init_data();
       $("#sub_div7").append('<textarea id="input_area" spellcheck="true" autofocus required="true" rows="20" cols="30"></textarea>');
       scroll_to_location();
     } else if (get_visible_element() == "div7") {
